@@ -17,9 +17,13 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 public class WebMockTest {
     @Autowired private MockMvc mockMvc;
     @MockBean private GreetingService service;
+
     @Test
     void greetingShouldReturnMessageFromService() throws Exception {
+        // @MockBean 의 행동 정의
         when(service.greet()).thenReturn("Hello, Mock");
+
+        // @MockBean 을 기반으로 동작
         this.mockMvc.perform(get("/greeting"))
                 .andDo(print())
                 .andExpect(status().isOk())
